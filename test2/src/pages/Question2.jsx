@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Question2 = () => {
@@ -46,6 +46,7 @@ const Question2 = () => {
     }
   };
 
+  
   return (
     <div className="min-h-screen bg-white p-8">
       <h1 className="text-4xl font-bold text-black mb-6">GitHub Search</h1>

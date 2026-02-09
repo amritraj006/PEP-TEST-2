@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import products from "../assets/products"; 
 //assets/products.js contains array of products with id, name and price
+import { ShoppingCart } from "lucide-react";
 
 const Question3 = () => {
   const [cart, setCart] = useState([]);
@@ -20,9 +21,20 @@ const Question3 = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center p-10 bg-white">
-      <h1 className="text-3xl flex items-center gap-3 font-bold mb-8">Product List
-        <span className="ml-2 text-sm text-gray-600">({cart.length} items in cart)</span>
-      </h1>
+      <div className="flex items-center gap-2 justify-between mb-8">
+  <h1 className="text-3xl font-bold flex items-center gap-3">
+    Product List
+  </h1>
+
+  <div className="relative inline-block">
+    <ShoppingCart size={26} className="text-gray-800" />
+    {cart.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        {cart.length}
+      </span>
+    )}
+  </div>
+</div>
         
 
       <table className="w-full max-w-2xl border border-gray-300 text-left">

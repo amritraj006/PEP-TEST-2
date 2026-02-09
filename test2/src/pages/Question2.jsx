@@ -107,8 +107,8 @@ const Question2 = () => {
           </h2>
 
           <div className="flex flex-col gap-4">
-            {repos.map((repo, index) => (
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" key={index}>
+            {repos.map((repo) => (
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" key={repo.id}>
                 <p className="bg-gray-900 text-white px-5 py-4 rounded-md shadow hover:bg-gray-800">
                   {repo.name}
                 </p>

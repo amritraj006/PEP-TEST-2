@@ -10,6 +10,10 @@ const Question2 = () => {
 
   const API = "https://api.github.com/users";
 
+  const handleChange = (e) => {
+    setUsername(e.target.value);
+  };
+
   const fetchGitHubUser = async (e) => {
     e.preventDefault();
 
@@ -46,26 +50,25 @@ const Question2 = () => {
     <div className="min-h-screen bg-white p-8">
       <h1 className="text-4xl font-bold text-black mb-6">GitHub Search</h1>
 
-      <form onSubmit={fetchGitHubUser} className="flex gap-4 mb-8">
+      <div className="flex gap-4 mb-8">
         <input
           type="text"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={handleChange}
           placeholder="Enter username..."
           className="w-[700px] max-w-full bg-gray-900 text-white px-4 py-3 rounded-md outline-none"
         />
 
-        <button
-          type="submit"
+        <button onClick={fetchGitHubUser}
           disabled={loading}
           className="bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 disabled:opacity-50"
         >
           {loading ? "Searching..." : "Search"}
         </button>
-      </form>
+      </div>
 
       {loading && <p className="text-gray-600 mb-6">Loading...</p>}
-      {error && <p className="text-red-600 font-semibold mb-6">{error}</p>}
+      {error && <p className="text-red-600 font-bold text-2xl mb-6">{error}</p>}
 
       {profile && (
         <div className="bg-gray-900 text-white rounded-xl p-8 shadow-lg flex gap-8 items-center w-[900px] max-w-full mb-10">
@@ -104,11 +107,11 @@ const Question2 = () => {
           </h2>
 
           <div className="flex flex-col gap-4">
-            {repos.map((repo) => (
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" key={repo.id}>
-                <div className="bg-gray-900 text-white px-5 py-4 rounded-md shadow hover:bg-gray-800">
+            {repos.map((repo, index) => (
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" key={index}>
+                <p className="bg-gray-900 text-white px-5 py-4 rounded-md shadow hover:bg-gray-800">
                   {repo.name}
-                </div>
+                </p>
               </a>
             ))}
           </div>

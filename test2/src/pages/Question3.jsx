@@ -1,20 +1,17 @@
-import React, { useMemo, useState } from "react";
-
-const products = [
-  { id: 1, name: "Mobile", price: 15000 },
-  { id: 2, name: "Fridge", price: 10000 },
-  { id: 3, name: "AC", price: 30000 },
-    { id: 4, name: "TV", price: 25000 },
-];
+import { useMemo, useState } from "react";
+import products from "../assets/products"; 
+//assets/products.js contains array of products with id, name and price
 
 const Question3 = () => {
   const [cart, setCart] = useState([]);
 
+  //Toggle specified product in cart
+  //If product is already in cart, remove it. Otherwise, add it to cart.
   const toggleCart = (id) => {
     cart.includes(id) ? setCart(cart.filter((item) => item !== id)) : setCart([...cart, id]);
   };
 
-  //use memo here
+  //useMemo to calculate total price of products in cart, only recalculates when cart changes
   const total = useMemo(() => {
     return products.reduce((sum, product) => {
       return cart.includes(product.id) ? sum + product.price : sum;
@@ -23,7 +20,10 @@ const Question3 = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center p-10 bg-white">
-      <h1 className="text-3xl font-bold mb-8">Product List</h1>
+      <h1 className="text-3xl flex items-center gap-3 font-bold mb-8">Product List
+        <span className="ml-2 text-sm text-gray-600">({cart.length} items in cart)</span>
+      </h1>
+        
 
       <table className="w-full max-w-2xl border border-gray-300 text-left">
         <thead className="bg-gray-100">
@@ -36,11 +36,12 @@ const Question3 = () => {
 
         <tbody>
           {products.map((product) => {
+            //Check if product is in cart to determine button text and style
             const inCart = cart.includes(product.id);
 
             return (
               <tr key={product.id}>
-                <td className="p-4 border">{product.name}</td>
+                <td className="p-4 border">{product.name} ({product.stock} in stock)</td>
                 <td className="p-4 border">{product.price}</td>
                 <td className="p-4 border">
                   <button
